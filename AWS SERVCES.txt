@@ -1,0 +1,231 @@
+AWS LAMBDA
+
+AWS LAMBDA is Serverless,compute service that lets you run code for virtually any type of appication or backend service without  managing the servers.
+we can triggers lambda from over 200 aws services and only pay for aht you use.
+
+NO Need of any external server,it will provide server.
+
+for example: if you write code ,that will run for 5 min then we have pay only for that 5 min. No additional pay is required.
+Use Case:
+1. Cost optimizations
+		For example, we have extra services are running ,for that extra services we have pay amount to overcome this we can use the lambda,how?
+AWS services-AWS Lamba-Code-notification- cost
+
+how means- we can write a one lamba function, in that we can write code, create one notification as these many services are running , that services we are not currnently useing like this, thhis will help to optimize the cost
+2.Data engineer pipeline appication
+1.ETL-AWS GLUE-LAMBDA
+
+for example, we have a one ETL ,for that we have created AWS GLUE to trigger this glue we ca write lambda function
+
+2.S3 storage-new data-notification
+3.failure
+
+
+3.File Transfer
+
+client-s3 storage-aws lambda-resize-s3 bucket
+
+
+for example client will store an image to s2 , then create a one lambda function as "the image have been uploaded",then the images have been rezied and then again stroed in to s3 bucket ,then it is show on to the website
+
+
+Benifits:
+1.no need for manager server
+
+2.auto scaling
+
+3.pay as you go
+
+4.performanace optimization.
+
+
+
+AWS EC2:elastic compute cloud
+
+Amazon EC2 is a web service that provides sizable compute capacity in the cloud. It is designed to make web-scale computing easier for developers.
+
+*Amazon Elastic Compute Cloud (Amazon EC2) is a web service that provides secure, resizable compute capacity in the cloud.
+
+*Access reliable, scalable infrastructure on demand.
+
+*Provide secure compute for your applications. Security is built into the foundation of Amazon EC2 with the AWS Nitro System.
+
+*Optimize performance and cost with flexible options like AWS Graviton-based instances, Amazon EC2 Spot instances, and AWS Savings Plans.
+
+*It will create a vertual mechine to store data. or it will create a server to store data.
+
+
+AWS GLUE:
+
+It is a cloud optimized,Extract Transform and load service.
+it allows to locate,transform all your datasets across your business,so that you can put them to use.
+
+
+why glue is different from other ETL products in three ways:
+it is serverless
+automaic schema inference
+auto generate etl scripts
+
+
+when shoulf i use glue:
+to build data warehouse to oraganize,cleanse,validate and formate data.
+to create etl pipline
+to run serverless quries against your s3 data lake.
+
+
+how the glue artiteclure will works?
+
+Example we have data on S3 that is like csv or json, then the in the glue, we have crawler,crawler will go to the data store to to extract the schema of the csv or json then it will store in the dat catalog. so data catalog contains all the schema of the data store in the s3 using crawler.,
+
+now we have schema of the data , then the jobs comes into the picture, after that ETL pilplenes are
+create then it is store in the data target.
+
+
+
+
+AWS Athena:
+
+It is queary service that makes easy to analyze data directly from s3 using standard sql.
+but is not database or datawarehouse.
+It will allows you write standrsd sql queary on top up of the s3 Data.
+
+feautres:
+serverless
+easy to queary
+flexible pricing
+fast performance
+secure
+
+price:
+
+we have pay only the queary ,what we will run.
+
+charged for the number of bytes scaned per queary,rounded up to the nearest megabyte.,
+with a 10MB minimun per queary.
+
+
+
+SNS:
+
+Amazon Simple Notification Service (Amazon SNS) is a managed service that provides message delivery from publishers to subscribers (also known as producers and consumers).
+ 
+Publishers communicate asynchronously with subscribers by sending messages to a topic, which is a logical access point and communication channel. 
+
+Clients can subscribe to the SNS topic and receive published messages using a supported endpoint type, such as Amazon Data Firehose, Amazon SQS, AWS Lambda, HTTP, email, mobile push notifications, and mobile text messages (SMS).
+
+
+
+
+AWS Kinesis: Serverless streaming Data Service
+
+
+collect,process and analyze real-time video and data streaming.
+
+real time data such as video,audio,application logs,website clickstreams and iot telemetry data for mechine learning,analytics,and other application.
+
+process and analyze data as it arrives and repond instantly instead of having to wait until all your data is collected before the processing can begin.
+
+
+Amazon Redshift
+
+Amazon Redshift uses SQL to analyze structured and semi-structured data across data warehouses, operational databases, and data lakes, using AWS-designed hardware and machine learning to deliver the best price performance at any scale.
+
+✔ Break through data silos and gain real time and predictive insights on all your data in a few clicks, with no data movement or data transformation.
+
+✔ Gain up to 3x better price performance than any other cloud data warehouse, with performance innovation out of the box at no additional cost to you.
+
+✔ Get data to insights in seconds without worrying about infrastructure management, with a secure and reliable analytics service.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+is a cloud based service or a data warehouse service that is used for collecting and storing data. Also,it enables a user to analyze the data using BI tools and simolifies the process of handling large scale data sets.
+
+costs less to operate than any other cloud data warehouse.
+
+performance matters and amazon redshift is the fastest data warehouse available.
+
+
+Advantages:
+High performance
+low cost
+scalability
+Availalility
+security
+flexibility-remove cluster,create cluster, take snopshot and move to other regoins
+simple database migration.
+
+
+Architecture :
+
+Client Applicaion of redshift basically interact with the leader node with the heo of two driver they are,JDBC and ODBC
+
+
+java and open
+
+JBDC- Amazon redshift service can monitor connections from other applications using JDBC connections.
+
+ODBC-alllows a user (directly from any application) to interact with live data of Amazon redshift.
+
+compute node-set of computing resources called as node.
+
+set of computing resources called as nodes,which gathered into a group clled a data warehouse cluster.
+
+
+leader node-this node manager the interaction between the client applicaton andcompute nodes. It analyses and develops designs in order to carry out dstsbase opetations
+
+
+The leader node runs the program and assigns the code to individual compute nodes,
+and the compute node excutes the program and shares the result back to the leader node for final aggregations,then devilve to cilent application.
+
+Compute nodes are categorized into slices. Each node slice is allocated with specific memory space,where it processesitd workload.
+
+These node slices work in parallel in order to finish their work
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

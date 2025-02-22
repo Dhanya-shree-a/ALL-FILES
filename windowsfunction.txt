@@ -1,0 +1,132 @@
+
+windows function:
+
+PySpark Window functions operate on a group of rows (like frame, partition) and return a single value for every input row.
+
+
+
+create a dataframe :
+
+spark = SparkSession.builder.appName('SparkByExamples.com').getOrCreate()
+
+simpleData = (("James", "Sales", 3000), \
+    ("Michael", "Sales", 4600),  \
+    ("Robert", "Sales", 4100),   \
+    ("Maria", "Finance", 3000),  \
+    ("James", "Sales", 3000),    \
+    ("Scott", "Finance", 3300),  \
+    ("Jen", "Finance", 3900),    \
+    ("Jeff", "Marketing", 3000), \
+    ("Kumar", "Marketing", 2000),\
+    ("Saif", "Sales", 4100) \
+  )
+ 
+columns= ["employee_name", "department", "salary"]
+df = spark.createDataFrame(data = simpleData, schema = columns)
+df.printSchema()
+df.show(truncate=False)
+
+2. PySpark Window Ranking functions
+
+ranking functions in pyspark:
+
+row_number(), rank(), and dense_rank()
+
+
+2.1)row_number()-Returns a sequential number starting from 1 within a window partition
+
+ex:
+
+from pyspark.sql.window import Window
+from pyspark.sql.functions import row_number
+windowSpec  = Window.partitionBy("department").orderBy("salary")
+
+df.withColumn("row_number",row_number().over(windowSpec)).show(truncate=False)
+
+
+
+2.2)rank()-window function provides a rank to the result within a window partition. This function leaves gaps in rank when there are ties.
+
+
+# rank() example
+from pyspark.sql.functions import rank
+df.withColumn("rank",rank().over(windowSpec)).show()
+
+
+2.3)dense_rank() window function is used to get the result with rank of rows within a window partition without any gaps. This is similar to rank() function difference being rank function leaves gaps in rank when there are ties.
+
+
+# dense_rank() example 
+from pyspark.sql.functions import dense_rank
+df.withColumn("dense_rank",dense_rank().over(windowSpec)).show()
+
+
+2.4)percent_rank Window Function
+
+# percent_rank() Example
+from pyspark.sql.functions import percent_rank
+df.withColumn("percent_rank",percent_rank().over(windowSpec)) \
+    .show()
+
+
+2.5)ntile() window function returns the relative rank of result rows within a window partition. 
+
+#ntile() Example
+from pyspark.sql.functions import ntile
+df.withColumn("ntile",ntile(2).over(windowSpec)) \
+    .show()
+
+
+3. PySpark Window Analytic Functions
+
+3.1)cume_dist(): This function computes the cumulative distribution of a value within a window partition.
+
+It calculates the relative rank of a value within the partition. The result ranges from 0 to 1, where a value of 0 indicates the lowest value in the partition, and 1 indicates the highest. 
+It’s useful for understanding the distribution of values compared to others within the same partition.
+
+# cume_dist() Example
+from pyspark.sql.functions import cume_dist    
+df.withColumn("cume_dist",cume_dist().over(windowSpec)) \
+   .show()
+
+
+
+3.2)lag Window Function
+This is the same as the LAG function in SQL. The lag() function allows you to access a
+ previous row’s value within the partition based on a specified offset. 
+It retrieves the column value from the previous row, which can be helpful for comparative 
+analysis or calculating differences between consecutive rows.
+
+
+# lag() Example
+from pyspark.sql.functions import lag    
+df.withColumn("lag",lag("salary",2).over(windowSpec)) \
+      .show()
+
+
+ 3.3)lead Window Function
+This is the same as the LEAD function in SQL. Similar to lag(), the lead() function retrieves the
+ column value from the following row within the partition based on a specified offset. 
+It helps in accessing subsequent row values for comparison or predictive analysis.
+
+
+# lead() Example
+from pyspark.sql.functions import lead    
+df.withColumn("lead",lead("salary",2).over(windowSpec)) \
+    .show()
+
+
+
+4)PySpark Window Aggregate Functions:
+
+
+# Aggregate functions examples
+windowSpecAgg  = Window.partitionBy("department")
+from pyspark.sql.functions import col,avg,sum,min,max,row_number 
+df.withColumn("row",row_number().over(windowSpec)) \
+  .withColumn("avg", avg(col("salary")).over(windowSpecAgg)) \
+  .withColumn("sum", sum(col("salary")).over(windowSpecAgg)) \
+  .withColumn("min", min(col("salary")).over(windowSpecAgg)) \
+  .withColumn("max", max(col("salary")).over(windowSpecAgg)) \
+  .where(col("row")==1).select("department","avg","sum","min","max") \
+  .show()

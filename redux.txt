@@ -1,0 +1,39 @@
+what is redux?
+
+this is an state management library
+
+open source javascript library for managening application state.
+ It is most commonly used with library such as react, angular for bluiding user interface.
+
+
+redux provides centralized store for our application state and logic.it gives component  direct access the data they need.
+
+redux is the predictable state container designed to helps to write js app,that behavess constinently cross the clinent,server and native envorimentnt.
+
+
+using redux we can make complex application easier by providing the consistent data across application.
+
+
+as application gross, maneging data with component state becomes challenging.
+
+to use redux no need to crreate react.app. we can use redux with any ui framework or libraries for manageing state.
+redux has large eco systems of add ons to fit ur needs
+
+
+while working with redux we can use redux devtools  easy to trace when ,where, and how about the application state changess.
+
+difficulty graph of redux  with time
+
+
+Redux is a JavaScript library used for managing application state. It provides a predictable and centralized way to manage the state by introducing a unidirectional data flow, where changes to the state are made through dispatched actions that are handled by reducers. Redux simplifies the state management process and provides useful features like middleware and time-travel debugging. It has become a popular choice for state management in React applications.
+
+
+
+core idea behind the redux is the entire state of an application is represented by a single javascript object. called as store
+
+this store is immutable,which means it can not be direct modified, instead changes the store made by dispatching actions,which are plane javascript object , that discribe what happend in the application. these action are process by reducers which are pure functions that take current state of an actions and resutns a new state
+
+
+
+
+
